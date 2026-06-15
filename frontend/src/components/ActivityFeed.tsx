@@ -174,9 +174,9 @@ export default function ActivityFeed({
       id: 0,
       name: 'Requirements Analyst',
       icon: FileText,
-      color: 'text-indigo-400',
-      bgColor: 'bg-indigo-500/10',
-      borderColor: 'border-indigo-500/20',
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-500/10',
+      borderColor: 'border-blue-500/20',
       getResults: () => {
         if (requirementsCompleted) return ['✓ Extracted functional constraints', '✓ Identified target project scale', '✓ Outlined database compliance'];
         if (getStageStatus(0) === 'Running') return ['Analyzing project description...', 'Mapping expected workloads...'];
@@ -187,7 +187,7 @@ export default function ActivityFeed({
       id: 1,
       name: 'Research Agent (Exa)',
       icon: Search,
-      color: 'text-emerald-400',
+      color: 'text-emerald-600',
       bgColor: 'bg-emerald-500/10',
       borderColor: 'border-emerald-500/20',
       getResults: () => {
@@ -200,9 +200,9 @@ export default function ActivityFeed({
       id: 2,
       name: 'Architecture Agent',
       icon: Cpu,
-      color: 'text-blue-400',
-      bgColor: 'bg-blue-500/10',
-      borderColor: 'border-blue-500/20',
+      color: 'text-indigo-600',
+      bgColor: 'bg-indigo-500/10',
+      borderColor: 'border-indigo-500/20',
       getResults: () => {
         if (architectureCompleted) return ['✓ Evaluated 3 candidate stacks', '✓ Generated physical database topologies', '✓ Created custom Docker templates'];
         if (getStageStatus(2) === 'Running') return ['Synthesizing MVP & Enterprise configurations...', 'Calculating database index requirements...'];
@@ -213,7 +213,7 @@ export default function ActivityFeed({
       id: 3,
       name: 'Cost Analysis Agent',
       icon: DollarSign,
-      color: 'text-amber-400',
+      color: 'text-amber-600',
       bgColor: 'bg-amber-500/10',
       borderColor: 'border-amber-500/20',
       getResults: () => {
@@ -226,7 +226,7 @@ export default function ActivityFeed({
       id: 4,
       name: 'Risk Analysis Agent',
       icon: ShieldAlert,
-      color: 'text-rose-400',
+      color: 'text-rose-600',
       bgColor: 'bg-rose-500/10',
       borderColor: 'border-rose-500/20',
       getResults: () => {
@@ -239,7 +239,7 @@ export default function ActivityFeed({
       id: 5,
       name: 'Recommendation Engine',
       icon: Award,
-      color: 'text-purple-400',
+      color: 'text-purple-600',
       bgColor: 'bg-purple-500/10',
       borderColor: 'border-purple-500/20',
       getResults: () => {
@@ -254,34 +254,34 @@ export default function ActivityFeed({
     <div className="w-full space-y-6">
       
       {/* 1. AGENT WORKFLOW PIPELINE VISUALIZATION */}
-      <div className="glass-panel p-6 rounded-2xl relative overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff01_1px,transparent_1px),linear-gradient(to_bottom,#ffffff01_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+      <div className="glass-panel p-6 rounded-2xl relative overflow-hidden border border-slate-200 shadow-sm">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000001_1px,transparent_1px),linear-gradient(to_bottom,#00000001_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
         
-        <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
-          <Loader2 className={`w-4 h-4 text-indigo-500 ${status === 'running' ? 'animate-spin' : ''}`} />
+        <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2 font-mono">
+          <Loader2 className={`w-4 h-4 text-accent ${status === 'running' ? 'animate-spin' : ''}`} />
           System Execution Pipeline
         </h3>
         
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-2 relative z-10 px-2 overflow-x-auto select-none">
           {/* Input Starting Node */}
           <div className="flex flex-col items-center">
-            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400">
-              <Play className="w-4 h-4 fill-gray-400" />
+            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-400">
+              <Play className="w-4 h-4 fill-slate-400 text-slate-400" />
             </div>
-            <span className="text-[10px] text-gray-500 font-mono mt-2 font-bold uppercase tracking-wider">Project Input</span>
+            <span className="text-[10px] text-slate-500 font-mono mt-2 font-bold uppercase tracking-wider">Project Input</span>
           </div>
 
           {stages.map((stage, idx) => {
             const stageStatus = getStageStatus(idx);
             
             // Connective arrow configuration
-            let arrowColor = 'bg-white/5';
+            let arrowColor = 'bg-slate-200';
             let pulseStyle = '';
             if (stageStatus === 'Running') {
-              arrowColor = 'bg-gradient-to-r from-indigo-500 to-indigo-500/20';
+              arrowColor = 'bg-gradient-to-r from-accent to-accent/20';
               pulseStyle = 'animate-pulse';
             } else if (stageStatus === 'Completed') {
-              arrowColor = 'bg-indigo-500';
+              arrowColor = 'bg-accent';
             }
 
             return (
@@ -290,7 +290,7 @@ export default function ActivityFeed({
                 <div className="hidden md:block flex-grow h-0.5 min-w-[30px] max-w-[60px] mx-1 relative">
                   <div className={`w-full h-full rounded ${arrowColor} ${pulseStyle}`}></div>
                   {stageStatus === 'Running' && (
-                    <div className="absolute top-1/2 left-0 w-2 h-2 -translate-y-1/2 rounded-full bg-indigo-400 animate-ping"></div>
+                    <div className="absolute top-1/2 left-0 w-2 h-2 -translate-y-1/2 rounded-full bg-accent animate-ping"></div>
                   )}
                 </div>
                 
@@ -298,32 +298,32 @@ export default function ActivityFeed({
                 <div className="flex flex-col items-center">
                   <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border transition-all duration-300 ${
                     stageStatus === 'Completed'
-                      ? 'bg-indigo-500/10 border-indigo-500 text-indigo-400 shadow-[0_0_15px_rgba(79,70,229,0.15)]'
+                      ? 'bg-accent/10 border-accent text-accent shadow-[0_0_15px_rgba(37,99,235,0.08)]'
                       : stageStatus === 'Running'
-                        ? 'bg-indigo-500/20 border-indigo-500/60 text-white animate-pulse shadow-[0_0_20px_rgba(79,70,229,0.3)]'
+                        ? 'bg-accent/20 border-accent text-accent font-bold animate-pulse shadow-[0_0_20px_rgba(37,99,235,0.15)]'
                         : stageStatus === 'Failed'
-                          ? 'bg-rose-500/10 border-rose-500 text-rose-400'
-                          : 'bg-white/5 border-white/10 text-gray-600'
+                          ? 'bg-rose-500/10 border-rose-500 text-rose-600'
+                          : 'bg-slate-50 border-slate-200 text-slate-400'
                   }`}>
                     {stageStatus === 'Completed' ? (
-                      <CheckCircle2 className="w-5 h-5 text-indigo-400" />
+                      <CheckCircle2 className="w-5 h-5 text-accent" />
                     ) : (
                       <stage.icon className="w-5 h-5" />
                     )}
                   </div>
                   
                   <span className={`text-[10px] font-bold font-mono mt-2 uppercase tracking-wider text-center max-w-[100px] truncate ${
-                    stageStatus === 'Running' ? 'text-white' : stageStatus === 'Completed' ? 'text-gray-300' : 'text-gray-600'
+                    stageStatus === 'Running' ? 'text-slate-800' : stageStatus === 'Completed' ? 'text-slate-700' : 'text-slate-400'
                   }`}>
                     {stage.name.split(' ')[0]}
                   </span>
                   
                   <span className={`text-[9px] font-mono mt-0.5 ${
                     stageStatus === 'Running' 
-                      ? 'text-indigo-400 animate-pulse' 
+                      ? 'text-accent animate-pulse font-bold' 
                       : stageStatus === 'Completed' 
-                        ? 'text-gray-500' 
-                        : 'text-gray-600'
+                        ? 'text-slate-500' 
+                        : 'text-slate-400'
                   }`}>
                     {stageStatus === 'Completed' ? getStageRuntime(idx) : stageStatus}
                   </span>
@@ -338,8 +338,8 @@ export default function ActivityFeed({
         {/* 2. AGENT DETAILED MONITORING CARDS */}
         <div className="lg:col-span-3 space-y-4">
           <div className="flex items-center justify-between px-1">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Agent Observability States</h3>
-            <span className="text-[10px] text-gray-500 font-mono">Telemetry: Live</span>
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest font-mono">Agent Observability States</h3>
+            <span className="text-[10px] text-slate-500 font-mono">Telemetry: Live</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -347,20 +347,20 @@ export default function ActivityFeed({
               const stageStatus = getStageStatus(idx);
               const runtime = getStageRuntime(idx);
               
-              let statusBadgeColor = 'bg-white/5 border-white/10 text-gray-500';
-              if (stageStatus === 'Completed') statusBadgeColor = 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400';
-              else if (stageStatus === 'Running') statusBadgeColor = 'bg-indigo-500/10 border-indigo-500/30 text-indigo-400 animate-pulse';
-              else if (stageStatus === 'Failed') statusBadgeColor = 'bg-rose-500/10 border-rose-500/25 text-rose-400';
+              let statusBadgeColor = 'bg-slate-100 border-slate-200 text-slate-500';
+              if (stageStatus === 'Completed') statusBadgeColor = 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600';
+              else if (stageStatus === 'Running') statusBadgeColor = 'bg-accent/10 border-accent/20 text-accent animate-pulse';
+              else if (stageStatus === 'Failed') statusBadgeColor = 'bg-rose-500/10 border-rose-500/25 text-rose-600';
 
               return (
                 <div 
                   key={stage.id} 
-                  className={`p-4 rounded-xl border transition-all duration-300 flex flex-col justify-between min-h-[145px] ${
+                  className={`p-4 rounded-xl border transition-all duration-300 flex flex-col justify-between min-h-[145px] shadow-sm ${
                     stageStatus === 'Running' 
-                      ? 'bg-indigo-500/[0.03] border-indigo-500/40 shadow-lg shadow-indigo-500/[0.02]' 
+                      ? 'bg-accent/[0.01] border-accent/40 shadow-md shadow-accent/[0.01]' 
                       : stageStatus === 'Completed'
-                        ? 'bg-white/[0.01] border-white/5'
-                        : 'bg-black/20 border-white/5 opacity-40'
+                        ? 'bg-white border-slate-200'
+                        : 'bg-slate-50/50 border-slate-100 opacity-50'
                   }`}
                 >
                   <div>
@@ -370,7 +370,7 @@ export default function ActivityFeed({
                         <div className={`p-1.5 rounded-lg ${stage.bgColor} ${stage.color}`}>
                           <stage.icon className="w-4 h-4" />
                         </div>
-                        <span className="text-xs font-bold text-white block truncate max-w-[120px]">{stage.name}</span>
+                        <span className="text-xs font-extrabold text-slate-800 block truncate max-w-[120px]">{stage.name}</span>
                       </div>
                       <span className={`px-2 py-0.5 rounded text-[8px] font-bold uppercase font-mono border ${statusBadgeColor}`}>
                         {stageStatus}
@@ -380,7 +380,7 @@ export default function ActivityFeed({
                     {/* Discovery Results */}
                     <div className="space-y-1 mt-3">
                       {stage.getResults().map((res, rIdx) => (
-                        <p key={rIdx} className="text-[10px] text-gray-400 font-light truncate leading-normal">
+                        <p key={rIdx} className="text-[10px] text-slate-600 font-light truncate leading-normal">
                           {res}
                         </p>
                       ))}
@@ -388,12 +388,12 @@ export default function ActivityFeed({
                   </div>
 
                   {/* Card Footer: Metrics */}
-                  <div className="flex justify-between items-center border-t border-white/5 pt-2 mt-4 text-[9px] font-mono text-gray-500">
+                  <div className="flex justify-between items-center border-t border-slate-100 pt-2 mt-4 text-[9px] font-mono text-slate-500">
                     <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3 text-gray-500" /> Runtime: <strong className="text-gray-400">{runtime}</strong>
+                      <Clock className="w-3 h-3 text-slate-400" /> Runtime: <strong className="text-slate-700">{runtime}</strong>
                     </span>
                     {stageStatus === 'Running' && (
-                      <span className="text-indigo-400 font-bold animate-pulse">processing...</span>
+                      <span className="text-accent font-bold animate-pulse">processing...</span>
                     )}
                   </div>
                 </div>
@@ -403,13 +403,13 @@ export default function ActivityFeed({
         </div>
 
         {/* 3. OBSERVABILITY SYSTEM TELEMETRY LOGS */}
-        <div className="lg:col-span-2 flex flex-col h-[525px] bg-[#07080d]/90 border border-white/10 rounded-2xl overflow-hidden font-mono shadow-2xl relative">
+        <div className="lg:col-span-2 flex flex-col h-[525px] bg-[#1e293b] border border-slate-800 rounded-2xl overflow-hidden font-mono shadow-xl relative">
           
           {/* Terminal Header */}
-          <div className="px-4 py-3.5 bg-white/5 border-b border-white/10 flex items-center justify-between text-xs text-gray-400 select-none">
+          <div className="px-4 py-3.5 bg-slate-800 border-b border-slate-700 flex items-center justify-between text-xs text-slate-400 select-none">
             <div className="flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-indigo-400" />
-              <span className="font-bold tracking-wider uppercase text-[10px]">Developer Observation Log Stream</span>
+              <Terminal className="w-4 h-4 text-accent" />
+              <span className="font-bold tracking-wider uppercase text-[10px] text-slate-300">Developer Observation Log Stream</span>
             </div>
             <div className="flex items-center gap-1.5">
               <div className="w-2.5 h-2.5 rounded-full bg-rose-500/70"></div>
@@ -421,22 +421,22 @@ export default function ActivityFeed({
           {/* Logs List */}
           <div className="flex-grow p-4 overflow-y-auto text-[11px] space-y-2.5 terminal-scrollbar select-text leading-relaxed">
             {logs.map((log, idx) => {
-              let color = 'text-gray-400';
+              let color = 'text-slate-300';
               if (log.message.includes('System Orchestrator')) {
-                color = 'text-indigo-400 font-semibold';
+                color = 'text-blue-400 font-semibold';
               } else if (log.message.includes('successfully') || log.message.includes('completed')) {
                 color = 'text-emerald-400';
               } else if (log.message.includes('ERROR') || log.message.includes('failed') || log.message.includes('FATAL')) {
                 color = 'text-rose-400 font-bold';
               } else if (log.message.includes('[Citation')) {
-                color = 'text-gray-500';
+                color = 'text-slate-500';
               } else if (log.message.includes('Stage')) {
-                color = 'text-indigo-300';
+                color = 'text-indigo-400';
               }
               
               return (
                 <div key={idx} className="flex gap-2">
-                  <span className="text-gray-600 flex-shrink-0 select-none">
+                  <span className="text-slate-500 flex-shrink-0 select-none">
                     [{log.timestamp.split('T')[1]?.substring(0, 8) || '00:00:00'}]
                   </span>
                   <span className={color}>
@@ -450,11 +450,11 @@ export default function ActivityFeed({
 
           {/* Failed notification banner */}
           {status === 'failed' && (
-            <div className="p-4 bg-rose-500/10 border-t border-rose-500/20 text-[10px] text-rose-400 flex items-start gap-2 select-none">
+            <div className="p-4 bg-rose-950/20 border-t border-rose-900/30 text-[10px] text-rose-400 flex items-start gap-2 select-none">
               <ShieldAlert className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5 animate-bounce" />
               <div>
                 <span className="font-bold block">Pipeline Interruption</span>
-                <span className="text-gray-400 font-light block mt-0.5">Execution aborted due to an API timeout or server crash. Check the telemetry log stream above.</span>
+                <span className="text-slate-400 font-light block mt-0.5">Execution aborted due to an API timeout or server crash. Check the telemetry log stream above.</span>
               </div>
             </div>
           )}

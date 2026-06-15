@@ -25,7 +25,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen text-gray-100 bg-[#090a10] selection:bg-indigo-500/30 selection:text-white">
+    <div className="min-h-screen text-slate-800 bg-background selection:bg-accent/20 selection:text-slate-900">
       {view === 'landing' ? (
         <LandingPage onStart={handleStartWithPreset} />
       ) : (

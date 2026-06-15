@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#090a10',
-        card: '#121420',
-        accent: '#6366f1',
+        background: '#f8fafc',
+        card: '#ffffff',
+        accent: '#2563eb',
         success: '#10b981',
         warning: '#f59e0b',
         danger: '#ef4444',
@@ -19,8 +19,8 @@ export default {
         mono: ['Fira Code', 'JetBrains Mono', 'monospace'],
       },
       boxShadow: {
-        'glow-accent': '0 0 20px rgba(99, 102, 241, 0.15)',
-        'glow-success': '0 0 20px rgba(16, 185, 129, 0.15)',
+        'glow-accent': '0 0 20px rgba(37, 99, 235, 0.12)',
+        'glow-success': '0 0 20px rgba(16, 185, 129, 0.12)',
       }
     },
   },

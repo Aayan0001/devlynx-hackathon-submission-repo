@@ -167,20 +167,20 @@ export default function Dashboard({ preset, onBack }: DashboardProps) {
     <div className="min-h-screen py-10 px-6 max-w-7xl mx-auto flex flex-col justify-between">
       
       {/* Top Navbar */}
-      <div className="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
+      <div className="flex justify-between items-center mb-8 border-b border-slate-200 pb-4">
         <div className="flex items-center gap-3">
           <button 
             onClick={onBack}
-            className="p-2 hover:bg-white/5 border border-transparent hover:border-white/10 rounded-xl transition text-gray-400 hover:text-white"
+            className="p-2 hover:bg-slate-100 border border-transparent hover:border-slate-200 rounded-xl transition text-slate-500 hover:text-slate-900"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <span className="font-extrabold text-lg tracking-wider text-white">
-            Decision Console <span className="text-accent">v1.2</span>
+          <span className="font-extrabold text-lg tracking-wider text-slate-800">
+            Decision Console <span className="text-accent font-black">v1.2</span>
           </span>
         </div>
 
-        <div className="flex items-center gap-2 text-xs text-gray-500 font-mono">
+        <div className="flex items-center gap-2 text-xs text-slate-500 font-mono">
           <div className="w-2 h-2 rounded-full bg-success animate-pulse"></div>
           <span>API Gateways: Online</span>
         </div>
@@ -190,8 +190,8 @@ export default function Dashboard({ preset, onBack }: DashboardProps) {
         
         {/* Left side: Inputs form */}
         <div className="lg:col-span-1 space-y-6">
-          <div className="glass-panel p-6 rounded-2xl">
-            <h3 className="font-bold text-white text-md mb-4 flex items-center gap-2">
+          <div className="glass-panel p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 className="font-extrabold text-slate-900 text-md mb-4 flex items-center gap-2">
               <Cpu className="w-4 h-4 text-accent" /> Parameters Input
             </h3>
             
@@ -199,7 +199,7 @@ export default function Dashboard({ preset, onBack }: DashboardProps) {
               
               {/* Description */}
               <div className="space-y-1">
-                <label className="text-xs text-gray-400 font-medium">Project Description</label>
+                <label className="text-xs text-slate-600 font-bold">Project Description</label>
                 <textarea 
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
@@ -207,18 +207,18 @@ export default function Dashboard({ preset, onBack }: DashboardProps) {
                   rows={4}
                   required
                   disabled={isSubmitting}
-                  className="w-full bg-black/40 border border-white/10 hover:border-white/20 focus:border-accent text-sm rounded-xl p-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-accent/50 resize-none font-light leading-relaxed disabled:opacity-50"
+                  className="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-accent text-sm rounded-xl p-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-accent/50 resize-none font-light leading-relaxed disabled:opacity-50"
                 />
               </div>
 
               {/* Expected Users */}
               <div className="space-y-1">
-                <label className="text-xs text-gray-400 font-medium">Expected Users (MAU)</label>
+                <label className="text-xs text-slate-600 font-bold">Expected Users (MAU)</label>
                 <select 
                   value={expectedUsers}
                   onChange={(e) => setExpectedUsers(e.target.value)}
                   disabled={isSubmitting}
-                  className="w-full bg-black/40 border border-white/10 focus:border-accent text-sm rounded-xl p-3 text-white focus:outline-none focus:ring-1 focus:ring-accent/50 font-light disabled:opacity-50"
+                  className="w-full bg-white border border-slate-200 focus:border-accent text-sm rounded-xl p-3 text-slate-800 focus:outline-none focus:ring-1 focus:ring-accent/50 font-medium disabled:opacity-50"
                 >
                   <option value="1,000">1,000 (Small Startup / MVP)</option>
                   <option value="10,000">10,000 (Growing SaaS)</option>
@@ -230,87 +230,87 @@ export default function Dashboard({ preset, onBack }: DashboardProps) {
 
               {/* Monthly Budget */}
               <div className="space-y-1">
-                <label className="text-xs text-gray-400 font-medium">Target Monthly Budget</label>
+                <label className="text-xs text-slate-600 font-bold">Target Monthly Budget</label>
                 <input 
                   type="text" 
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
                   placeholder="e.g. $500 / month"
                   disabled={isSubmitting}
-                  className="w-full bg-black/40 border border-white/10 focus:border-accent text-sm rounded-xl p-3 text-white focus:outline-none focus:ring-1 focus:ring-accent/50 font-light disabled:opacity-50"
+                  className="w-full bg-white border border-slate-200 focus:border-accent text-sm rounded-xl p-3 text-slate-800 focus:outline-none focus:ring-1 focus:ring-accent/50 font-medium disabled:opacity-50"
                 />
               </div>
 
               {/* Development Timeline */}
               <div className="space-y-1">
-                <label className="text-xs text-gray-400 font-medium">Deployment Timeline</label>
+                <label className="text-xs text-slate-600 font-bold">Deployment Timeline</label>
                 <input 
                   type="text" 
                   value={timeline}
                   onChange={(e) => setTimeline(e.target.value)}
                   placeholder="e.g. 3 months"
                   disabled={isSubmitting}
-                  className="w-full bg-black/40 border border-white/10 focus:border-accent text-sm rounded-xl p-3 text-white focus:outline-none focus:ring-1 focus:ring-accent/50 font-light disabled:opacity-50"
+                  className="w-full bg-white border border-slate-200 focus:border-accent text-sm rounded-xl p-3 text-slate-800 focus:outline-none focus:ring-1 focus:ring-accent/50 font-medium disabled:opacity-50"
                 />
               </div>
 
               <button 
                 type="submit"
                 disabled={isSubmitting || !description.trim()}
-                className="w-full py-3.5 bg-gradient-to-r from-accent to-indigo-600 hover:from-indigo-600 hover:to-accent disabled:from-white/5 disabled:to-white/5 disabled:border-white/5 border border-transparent disabled:text-gray-600 text-white font-semibold rounded-xl text-sm transition-all duration-200 shadow-glow-accent flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-3.5 bg-gradient-to-r from-accent to-indigo-600 hover:from-indigo-600 hover:to-accent disabled:from-slate-100 disabled:to-slate-100 disabled:border-slate-200 disabled:text-slate-400 text-white font-bold rounded-xl text-sm transition-all duration-200 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Play className="w-4 h-4 fill-white" />
+                <Play className="w-4 h-4 fill-white text-white" />
                 {isSubmitting ? 'Analyzing System...' : 'Generate Analysis'}
               </button>
             </form>
           </div>
 
           {/* Hackathon Demo Mode */}
-          <div className="p-5 bg-indigo-500/5 border border-indigo-500/20 rounded-2xl space-y-4 shadow-lg shadow-indigo-500/5">
+          <div className="p-5 bg-accent/5 border border-accent/20 rounded-2xl space-y-4 shadow-sm shadow-accent/5">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest block">Hackathon Demo Mode</span>
-              <span className="px-2 py-0.5 rounded-full bg-indigo-500/10 text-[9px] font-bold text-indigo-400 uppercase border border-indigo-500/20">Presets</span>
+              <span className="text-[10px] font-bold text-accent uppercase tracking-widest block">Hackathon Demo Mode</span>
+              <span className="px-2 py-0.5 rounded-full bg-accent/10 text-[9px] font-bold text-accent uppercase border border-accent/20">Presets</span>
             </div>
             <div className="space-y-2 text-xs">
               <button 
                 type="button"
                 onClick={() => fillSample('Ride-sharing marketplace clone with real-time GPS coordinate driver-passenger matching, routing maps, and notification triggers.', '100,000', '$1,000 / month', '4 months')}
-                className="w-full text-left p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition duration-150 border border-white/5 hover:border-indigo-500/20 flex items-center justify-between"
+                className="w-full text-left p-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 transition duration-150 border border-slate-200 hover:border-accent/30 flex items-center justify-between shadow-sm"
               >
                 <span className="truncate">🚗 Uber Clone for 100k Users</span>
-                <span className="text-[10px] text-gray-500 font-mono">100k</span>
+                <span className="text-[10px] text-slate-500 font-mono">100k</span>
               </button>
               <button 
                 type="button"
                 onClick={() => fillSample('AI-powered SaaS offering automated SEO audit generation, web scraping, vector database RAG search summaries, and LLM text generation.', '10,000', '$300 / month', '2 months')}
-                className="w-full text-left p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition duration-150 border border-white/5 hover:border-indigo-500/20 flex items-center justify-between"
+                className="w-full text-left p-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 transition duration-150 border border-slate-200 hover:border-accent/30 flex items-center justify-between shadow-sm"
               >
                 <span className="truncate">🤖 AI SaaS Startup</span>
-                <span className="text-[10px] text-gray-500 font-mono">10k</span>
+                <span className="text-[10px] text-slate-500 font-mono">10k</span>
               </button>
               <button 
                 type="button"
                 onClick={() => fillSample('B2B e-commerce marketplace platform supporting user storefronts, product catalogs, transactional orders ledger, and Stripe payouts.', '50,000', '$500 / month', '3 months')}
-                className="w-full text-left p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition duration-150 border border-white/5 hover:border-indigo-500/20 flex items-center justify-between"
+                className="w-full text-left p-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 transition duration-150 border border-slate-200 hover:border-accent/30 flex items-center justify-between shadow-sm"
               >
                 <span className="truncate">🛍️ E-commerce Marketplace</span>
-                <span className="text-[10px] text-gray-500 font-mono">50k</span>
+                <span className="text-[10px] text-slate-500 font-mono">50k</span>
               </button>
               <button 
                 type="button"
                 onClick={() => fillSample('High frequency real-time multiplayer card matching lobby web game with persistent rooms and latency-synchronized state engines.', '50,000', '$200 / month', '3 months')}
-                className="w-full text-left p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition duration-150 border border-white/5 hover:border-indigo-500/20 flex items-center justify-between"
+                className="w-full text-left p-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 transition duration-150 border border-slate-200 hover:border-accent/30 flex items-center justify-between shadow-sm"
               >
                 <span className="truncate">🎮 Multiplayer Game</span>
-                <span className="text-[10px] text-gray-500 font-mono">50k</span>
+                <span className="text-[10px] text-slate-500 font-mono">50k</span>
               </button>
               <button 
                 type="button"
                 onClick={() => fillSample('Social media microblogging feed app with image attachments, follower graph queries, real-time activity notifications, and text posts.', '100,000', '$800 / month', '5 months')}
-                className="w-full text-left p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition duration-150 border border-white/5 hover:border-indigo-500/20 flex items-center justify-between"
+                className="w-full text-left p-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 transition duration-150 border border-slate-200 hover:border-accent/30 flex items-center justify-between shadow-sm"
               >
                 <span className="truncate">📱 Social Media Platform</span>
-                <span className="text-[10px] text-gray-500 font-mono">100k</span>
+                <span className="text-[10px] text-slate-500 font-mono">100k</span>
               </button>
             </div>
           </div>
@@ -321,22 +321,22 @@ export default function Dashboard({ preset, onBack }: DashboardProps) {
           
           {!activeReport ? (
             // Idle State: Welcome display and Past History list
-            <div className="flex-grow flex flex-col justify-center items-center p-8 border border-white/5 rounded-3xl bg-card/10 relative overflow-hidden min-h-[450px]">
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+            <div className="flex-grow flex flex-col justify-center items-center p-8 border border-slate-200 rounded-3xl bg-white relative overflow-hidden min-h-[450px] shadow-sm">
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000002_1px,transparent_1px),linear-gradient(to_bottom,#00000002_1px,transparent_1px)] bg-[size:32px_32px]"></div>
               
               <div className="z-10 text-center max-w-xl space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mx-auto text-accent mb-4 shadow-glow-accent animate-bounce">
+                <div className="w-12 h-12 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mx-auto text-accent mb-4 shadow-sm animate-bounce">
                   <Terminal className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold text-white">System Architect Console Idle</h3>
-                <p className="text-sm text-gray-500 font-light leading-relaxed">
+                <h3 className="text-xl font-extrabold text-slate-950">System Architect Console Idle</h3>
+                <p className="text-sm text-slate-500 font-light leading-relaxed">
                   Enter a software idea in the parameters panel on the left, click **Generate**, and watch the multi-agent pipeline stream real-world technical options in real-time.
                 </p>
 
                 {/* Past analyses history list */}
                 {reportsHistory.length > 0 && (
-                  <div className="mt-8 text-left max-w-2xl mx-auto w-full border-t border-white/5 pt-6">
-                    <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                  <div className="mt-8 text-left max-w-2xl mx-auto w-full border-t border-slate-200 pt-6">
+                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-1.5 font-mono">
                       <History className="w-4 h-4 text-accent" /> Recent Analyses History
                     </h4>
                     <div className="space-y-2.5 max-h-[220px] overflow-y-auto pr-2 terminal-scrollbar">
@@ -344,11 +344,11 @@ export default function Dashboard({ preset, onBack }: DashboardProps) {
                         <div 
                           key={hReport.id}
                           onClick={() => handleLoadHistoryItem(hReport.id)}
-                          className="p-3.5 bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/20 rounded-xl cursor-pointer transition flex justify-between items-center"
+                          className="p-3.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-accent/20 rounded-xl cursor-pointer transition flex justify-between items-center shadow-sm"
                         >
                           <div className="min-w-0 pr-4">
-                            <span className="text-xs font-bold text-white block truncate">{hReport.request.description}</span>
-                            <span className="text-[10px] text-gray-500 font-mono flex items-center gap-1.5 mt-1">
+                            <span className="text-xs font-bold text-slate-800 block truncate">{hReport.request.description}</span>
+                            <span className="text-[10px] text-slate-500 font-mono flex items-center gap-1.5 mt-1">
                               <Clock className="w-3 h-3" /> {new Date(hReport.createdAt).toLocaleDateString()} &bull; {hReport.request.expectedUsers} MAU
                             </span>
                           </div>
@@ -356,9 +356,9 @@ export default function Dashboard({ preset, onBack }: DashboardProps) {
                             <span className={`px-2 py-0.5 rounded text-[9px] font-bold ${
                               hReport.status === 'completed' 
                                 ? 'bg-success/15 border border-success/30 text-success' 
-                                : 'bg-white/5 border border-white/10 text-gray-400'
+                                : 'bg-slate-100 border border-slate-200 text-slate-500'
                             }`}>{hReport.status}</span>
-                            <ChevronRight className="w-4 h-4 text-gray-500" />
+                            <ChevronRight className="w-4 h-4 text-slate-400" />
                           </div>
                         </div>
                       ))}
@@ -372,14 +372,14 @@ export default function Dashboard({ preset, onBack }: DashboardProps) {
             <div className="flex-grow space-y-6">
               
               {/* Header active indicators */}
-              <div className="p-5 bg-card/60 border border-white/5 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div className="p-5 bg-white border border-slate-200 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-sm">
                 <div className="min-w-0">
-                  <span className="text-xs text-gray-500 block truncate">Target Product Description</span>
-                  <span className="text-sm font-bold text-white truncate block">{activeReport.request.description}</span>
+                  <span className="text-xs text-slate-400 block truncate font-mono">Target Product Description</span>
+                  <span className="text-sm font-bold text-slate-800 truncate block">{activeReport.request.description}</span>
                 </div>
                 <div className="flex items-center gap-4 flex-shrink-0">
                   <div>
-                    <span className="text-xs text-gray-500 block">Status Code</span>
+                    <span className="text-xs text-slate-400 block font-mono">Status Code</span>
                     <span className={`px-2.5 py-1 rounded-lg text-xs font-bold font-mono border inline-block mt-0.5 uppercase ${
                       activeReport.status === 'completed' 
                         ? 'bg-success/10 border-success/30 text-success' 
@@ -394,7 +394,7 @@ export default function Dashboard({ preset, onBack }: DashboardProps) {
                         setActiveReport(null);
                         setActiveReportId(null);
                       }}
-                      className="px-4 py-2 border border-white/10 hover:bg-white/5 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition"
+                      className="px-4 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition shadow-sm cursor-pointer"
                     >
                       New Blueprint
                     </button>
