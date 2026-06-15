@@ -8,7 +8,7 @@ export default function App() {
   const [view, setView] = useState<ViewMode>('landing');
 
   return (
-    <div class="min-h-screen text-gray-100 bg-[#090a10] selection:bg-indigo-500/30 selection:text-white">
+    <div className="min-h-screen text-gray-100 bg-[#090a10] selection:bg-indigo-500/30 selection:text-white">
       {view === 'landing' ? (
         <LandingPage onStart={() => setView('dashboard')} />
       ) : (

@@ -42,20 +42,20 @@ export default function ActivityFeed({
   ];
 
   return (
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-7xl mx-auto py-4">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-7xl mx-auto py-4">
       
       {/* Stages Progress Panel */}
-      <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between h-fit">
+      <div className="glass-panel p-6 rounded-2xl flex flex-col justify-between h-fit">
         <div>
-          <h3 class="font-bold text-white text-lg mb-6 flex items-center gap-2">
-            <Loader2 class={`w-5 h-5 text-accent ${status === 'running' ? 'animate-spin' : ''}`} />
+          <h3 className="font-bold text-white text-lg mb-6 flex items-center gap-2">
+            <Loader2 className={`w-5 h-5 text-accent ${status === 'running' ? 'animate-spin' : ''}`} />
             Orchestrator Sequence
           </h3>
-          <div class="space-y-5">
+          <div className="space-y-5">
             {stages.map((stage, idx) => (
-              <div key={idx} class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class={`w-7 h-7 rounded-lg flex items-center justify-center border text-xs font-bold ${
+              <div key={idx} className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className={`w-7 h-7 rounded-lg flex items-center justify-center border text-xs font-bold ${
                     stage.done 
                       ? 'bg-success/15 border-success/30 text-success' 
                       : stage.running 
@@ -64,7 +64,7 @@ export default function ActivityFeed({
                   }`}>
                     {stage.done ? '✓' : idx + 1}
                   </div>
-                  <span class={`text-sm ${
+                  <span className={`text-sm ${
                     stage.done 
                       ? 'text-gray-300' 
                       : stage.running 
@@ -75,8 +75,8 @@ export default function ActivityFeed({
                   </span>
                 </div>
                 <div>
-                  {stage.done && <CheckCircle2 class="w-4 h-4 text-success" />}
-                  {stage.running && <Loader2 class="w-4 h-4 text-accent animate-spin" />}
+                  {stage.done && <CheckCircle2 className="w-4 h-4 text-success" />}
+                  {stage.running && <Loader2 className="w-4 h-4 text-accent animate-spin" />}
                 </div>
               </div>
             ))}
@@ -84,33 +84,33 @@ export default function ActivityFeed({
         </div>
 
         {status === 'failed' && (
-          <div class="mt-8 p-4 bg-danger/10 border border-danger/20 rounded-xl flex items-start gap-3">
-            <ShieldAlert class="w-5 h-5 text-danger flex-shrink-0 mt-0.5" />
+          <div className="mt-8 p-4 bg-danger/10 border border-danger/20 rounded-xl flex items-start gap-3">
+            <ShieldAlert className="w-5 h-5 text-danger flex-shrink-0 mt-0.5" />
             <div>
-              <div class="font-bold text-danger text-sm">Execution Interrupted</div>
-              <div class="text-xs text-gray-400 mt-1 font-light">The pipeline crashed. Check the console log outputs on the right for troubleshooting details.</div>
+              <div className="font-bold text-danger text-sm">Execution Interrupted</div>
+              <div className="text-xs text-gray-400 mt-1 font-light">The pipeline crashed. Check the console log outputs on the right for troubleshooting details.</div>
             </div>
           </div>
         )}
       </div>
 
       {/* Live System Console Logs */}
-      <div class="lg:col-span-2 flex flex-col h-[400px] bg-black/80 border border-white/10 rounded-2xl overflow-hidden font-mono shadow-2xl">
+      <div className="lg:col-span-2 flex flex-col h-[400px] bg-black/80 border border-white/10 rounded-2xl overflow-hidden font-mono shadow-2xl">
         {/* Terminal Header */}
-        <div class="px-4 py-3 bg-white/5 border-b border-white/10 flex items-center justify-between text-xs text-gray-400">
-          <div class="flex items-center gap-2">
-            <Terminal class="w-4 h-4 text-accent" />
+        <div className="px-4 py-3 bg-white/5 border-b border-white/10 flex items-center justify-between text-xs text-gray-400">
+          <div className="flex items-center gap-2">
+            <Terminal className="w-4 h-4 text-accent" />
             <span>Developer Console Log Stream</span>
           </div>
-          <div class="flex items-center gap-1.5">
-            <div class="w-2.5 h-2.5 rounded-full bg-danger/55"></div>
-            <div class="w-2.5 h-2.5 rounded-full bg-warning/55"></div>
-            <div class="w-2.5 h-2.5 rounded-full bg-success/55"></div>
+          <div className="flex items-center gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-danger/55"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-warning/55"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-success/55"></div>
           </div>
         </div>
 
         {/* Logs List */}
-        <div class="flex-grow p-4 overflow-y-auto text-xs space-y-2.5 terminal-scrollbar select-text">
+        <div className="flex-grow p-4 overflow-y-auto text-xs space-y-2.5 terminal-scrollbar select-text">
           {logs.map((log, idx) => {
             let color = 'text-gray-400';
             if (log.message.includes('System Orchestrator')) {
@@ -126,11 +126,11 @@ export default function ActivityFeed({
             }
             
             return (
-              <div key={idx} class="leading-relaxed flex gap-2">
-                <span class="text-gray-600 flex-shrink-0 select-none">
+              <div key={idx} className="leading-relaxed flex gap-2">
+                <span className="text-gray-600 flex-shrink-0 select-none">
                   [{log.timestamp.split('T')[1].substring(0, 8)}]
                 </span>
-                <span class={color}>
+                <span className={color}>
                   {log.message}
                 </span>
               </div>
