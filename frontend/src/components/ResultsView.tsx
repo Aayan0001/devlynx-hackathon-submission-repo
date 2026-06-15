@@ -1136,50 +1136,6 @@ export default function ResultsView({ report }: ResultsViewProps) {
         </div>
       </div>
 
-      {/* 10. SYSTEM BLUEPRINTS */}
-      {recommendation && (
-        <div>
-          <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest font-mono mb-2 flex items-center gap-2">
-            <Layers className="w-4 h-4 text-accent" /> Generated System Blueprints
-          </h2>
-          <p className="text-xs text-gray-500 mb-6 font-light">Instantly export these files to spin up your dockerized stack or deploy to production.</p>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-              <div className="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-                <span className="text-xs font-bold text-white font-mono text-slate-800">docker-compose.yml</span>
-                <button 
-                  onClick={() => handleCopyCode(recommendation.dockerComposeBoilerplate, 'docker')}
-                  className="text-[10px] font-bold text-slate-600 hover:text-slate-900 transition border border-slate-200 bg-white hover:bg-slate-50 px-2.5 py-1 rounded cursor-pointer shadow-sm"
-                >
-                  {copiedFile === 'docker' ? <Check className="w-3 h-3 text-success animate-pulse" /> : <Copy className="w-3 h-3" />}
-                  {copiedFile === 'docker' ? 'Copied' : 'Copy'}
-                </button>
-              </div>
-              <pre className="p-4 overflow-x-auto text-[10px] text-slate-600 font-mono leading-relaxed h-[350px] scrollbar-thin bg-slate-50/50">
-                {recommendation.dockerComposeBoilerplate}
-              </pre>
-            </div>
-
-            <div className="flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-              <div className="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-                <span className="text-xs font-bold text-white font-mono text-slate-800">README.md</span>
-                <button 
-                  onClick={() => handleCopyCode(recommendation.boilerplateReadme, 'readme')}
-                  className="text-[10px] font-bold text-slate-600 hover:text-slate-900 transition border border-slate-200 bg-white hover:bg-slate-50 px-2.5 py-1 rounded cursor-pointer shadow-sm"
-                >
-                  {copiedFile === 'readme' ? <Check className="w-3 h-3 text-success animate-pulse" /> : <Copy className="w-3 h-3" />}
-                  {copiedFile === 'readme' ? 'Copied' : 'Copy'}
-                </button>
-              </div>
-              <pre className="p-4 overflow-x-auto text-[10px] text-slate-600 font-mono leading-relaxed h-[350px] scrollbar-thin bg-slate-50/50">
-                {recommendation.boilerplateReadme}
-              </pre>
-            </div>
-          </div>
-        </div>
-      )}
-
     </div>
   );
 }
