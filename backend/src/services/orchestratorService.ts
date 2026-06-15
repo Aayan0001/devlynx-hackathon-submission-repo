@@ -35,6 +35,8 @@ export function startAnalysis(request: AnalysisRequest): string {
   return reportId;
 }
 
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 async function runPipelineAsync(reportId: string): Promise<void> {
   const report = await getReport(reportId);
   if (!report) {
@@ -67,6 +69,8 @@ async function runPipelineAsync(reportId: string): Promise<void> {
       await saveReport(updatedReport);
     }
 
+    await sleep(2500);
+
     // Stage 2: Research Agent
     await addLog('System Orchestrator: Activating Stage 2 - Exa AI Research Agent...');
     const research = await runResearchAgent(report.request, requirements, addLog);
@@ -76,6 +80,8 @@ async function runPipelineAsync(reportId: string): Promise<void> {
       updatedReport.research = research;
       await saveReport(updatedReport);
     }
+
+    await sleep(2500);
 
     // Stage 3: Architecture Agent
     await addLog('System Orchestrator: Activating Stage 3 - Systems Architecture Design Agent...');
@@ -108,6 +114,8 @@ async function runPipelineAsync(reportId: string): Promise<void> {
       await saveReport(updatedReport);
     }
 
+    await sleep(2500);
+
     // Stage 4: Cost Analysis Agent
     await addLog('System Orchestrator: Activating Stage 4 - FinOps Infrastructure Costing Agent...');
     const cost = await runCostAgent(report.request, requirements, architectures, addLog);
@@ -118,6 +126,8 @@ async function runPipelineAsync(reportId: string): Promise<void> {
       await saveReport(updatedReport);
     }
 
+    await sleep(2500);
+
     // Stage 5: Risk Agent
     await addLog('System Orchestrator: Activating Stage 5 - Technical Risk Assessor Agent...');
     const risks = await runRiskAgent(report.request, requirements, architectures, addLog);
@@ -127,6 +137,8 @@ async function runPipelineAsync(reportId: string): Promise<void> {
       updatedReport.risks = risks;
       await saveReport(updatedReport);
     }
+
+    await sleep(2500);
 
     // Stage 6: Recommendation Agent
     await addLog('System Orchestrator: Activating Stage 6 - Decision Recommendation Orchestrator...');
