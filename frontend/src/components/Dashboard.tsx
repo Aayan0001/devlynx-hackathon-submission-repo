@@ -265,27 +265,52 @@ export default function Dashboard({ preset, onBack }: DashboardProps) {
             </form>
           </div>
 
-          {/* Quick presets helper */}
-          <div className="p-5 bg-card/20 border border-white/5 rounded-2xl space-y-3">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider block">Templates</span>
+          {/* Hackathon Demo Mode */}
+          <div className="p-5 bg-indigo-500/5 border border-indigo-500/20 rounded-2xl space-y-4 shadow-lg shadow-indigo-500/5">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest block">Hackathon Demo Mode</span>
+              <span className="px-2 py-0.5 rounded-full bg-indigo-500/10 text-[9px] font-bold text-indigo-400 uppercase border border-indigo-500/20">Presets</span>
+            </div>
             <div className="space-y-2 text-xs">
               <button 
-                onClick={() => fillSample('Uber clone with real-time GPS coordinate driver passenger matching and routing maps.', '100,000', '$1,000 / month', '4 months')}
-                className="w-full text-left p-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 transition block truncate"
+                type="button"
+                onClick={() => fillSample('Ride-sharing marketplace clone with real-time GPS coordinate driver-passenger matching, routing maps, and notification triggers.', '100,000', '$1,000 / month', '4 months')}
+                className="w-full text-left p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition duration-150 border border-white/5 hover:border-indigo-500/20 flex items-center justify-between"
               >
-                🚗 Ride-Sharing Uber Clone
+                <span className="truncate">🚗 Uber Clone for 100k Users</span>
+                <span className="text-[10px] text-gray-500 font-mono">100k</span>
               </button>
               <button 
-                onClick={() => fillSample('AI SaaS application offering automated SEO audit generation, scraping, and RAG search summaries.', '10,000', '$300 / month', '2 months')}
-                className="w-full text-left p-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 transition block truncate"
+                type="button"
+                onClick={() => fillSample('AI-powered SaaS offering automated SEO audit generation, web scraping, vector database RAG search summaries, and LLM text generation.', '10,000', '$300 / month', '2 months')}
+                className="w-full text-left p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition duration-150 border border-white/5 hover:border-indigo-500/20 flex items-center justify-between"
               >
-                🤖 AI SaaS & SEO Automation
+                <span className="truncate">🤖 AI SaaS Startup</span>
+                <span className="text-[10px] text-gray-500 font-mono">10k</span>
               </button>
               <button 
-                onClick={() => fillSample('High frequency real-time multiplayer card matching lobby web game with persistent rooms.', '50,000', '$200 / month', '3 months')}
-                className="w-full text-left p-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 transition block truncate"
+                type="button"
+                onClick={() => fillSample('B2B e-commerce marketplace platform supporting user storefronts, product catalogs, transactional orders ledger, and Stripe payouts.', '50,000', '$500 / month', '3 months')}
+                className="w-full text-left p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition duration-150 border border-white/5 hover:border-indigo-500/20 flex items-center justify-between"
               >
-                🎮 Realtime Multiplayer Game
+                <span className="truncate">🛍️ E-commerce Marketplace</span>
+                <span className="text-[10px] text-gray-500 font-mono">50k</span>
+              </button>
+              <button 
+                type="button"
+                onClick={() => fillSample('High frequency real-time multiplayer card matching lobby web game with persistent rooms and latency-synchronized state engines.', '50,000', '$200 / month', '3 months')}
+                className="w-full text-left p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition duration-150 border border-white/5 hover:border-indigo-500/20 flex items-center justify-between"
+              >
+                <span className="truncate">🎮 Multiplayer Game</span>
+                <span className="text-[10px] text-gray-500 font-mono">50k</span>
+              </button>
+              <button 
+                type="button"
+                onClick={() => fillSample('Social media microblogging feed app with image attachments, follower graph queries, real-time activity notifications, and text posts.', '100,000', '$800 / month', '5 months')}
+                className="w-full text-left p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition duration-150 border border-white/5 hover:border-indigo-500/20 flex items-center justify-between"
+              >
+                <span className="truncate">📱 Social Media Platform</span>
+                <span className="text-[10px] text-gray-500 font-mono">100k</span>
               </button>
             </div>
           </div>

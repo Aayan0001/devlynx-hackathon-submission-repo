@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechStack AI - Executive Pitch & Moat</title>
+  
+  <!-- Tailwind CDN for quick styled rendering -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #1f2937;
+      background-color: #f9fafb;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Outfit', sans-serif;
+    }
+    @media print {
+      body {
+        background-color: #ffffff;
+        color: #000000;
+        font-size: 12pt;
+      }
+      .no-print {
+        display: none;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      .shadow-glow {
+        box-shadow: none !important;
+        border: 1px solid #e5e7eb !important;
+      }
+    }
+  </style>
+</head>
+<body class="p-6 md:p-12 max-w-4xl mx-auto bg-gray-50">
+
+  <!-- Print Info Header -->
+  <div class="no-print mb-8 p-4 bg-indigo-50 border border-indigo-200 rounded-2xl flex justify-between items-center text-xs text-indigo-800">
+    <div>
+      <span class="font-bold">📄 Print Ready Pitch Deck</span> &bull; Open in any browser, press <strong>Ctrl + P</strong> (Cmd + P on Mac), and choose <strong>"Save as PDF"</strong> to generate your print file.
+    </div>
+    <button onclick="window.print()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition duration-150 shadow">
+      Print / Save as PDF
+    </button>
+  </div>
+
+  <header class="border-b border-gray-200 pb-6 mb-8 flex justify-between items-center">
+    <div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+        TECHSTACK <span class="text-indigo-600">AI</span>
+      </h1>
+      <p class="text-xs uppercase tracking-wider text-gray-500 font-semibold mt-1">Autonomous Technical Decision Copilot</p>
+    </div>
+    <div class="text-right text-xs text-gray-400 font-mono">
+      <span>Release v1.2</span> &bull; <span>Hackathon Submission</span>
+    </div>
+  </header>
+
+  <!-- Section 1: Core Concept -->
+  <section class="mb-12">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider mb-3">
+      Executive Summary
+    </div>
+    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">What is TechStack AI?</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm">
+        <h3 class="font-bold text-gray-800 text-sm mb-2">The Layman Analogy</h3>
+        <p class="text-xs text-gray-500 font-light leading-relaxed">
+          Just as building a house requires architects, surveyors, and safety inspectors, TechStack AI acts as an entire consulting team, auditing, researching, and budgeting your software stack in less than a minute.
+        </p>
+      </div>
+      <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm">
+        <h3 class="font-bold text-gray-800 text-sm mb-2">The Core Problem</h3>
+        <p class="text-xs text-gray-500 font-light leading-relaxed">
+          Engineers choose tech stacks based on familiarity or hype. Generic LLMs lack live web indexing, suffer from cutoff dates, and fail to calculate scaling costs or provide ready-to-run configurations.
+        </p>
+      </div>
+      <div class="p-5 bg-white border border-gray-200 rounded-2xl shadow-sm">
+        <h3 class="font-bold text-gray-800 text-sm mb-2">The Solution</h3>
+        <p class="text-xs text-gray-500 font-light leading-relaxed">
+          A multi-agent orchestrator that uses Exa AI for web research and Gemini AI for system design, outputting comparison matrices, risk evaluations, and executable Docker Compose code.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Agent Architecture -->
+  <section class="mb-12 page-break">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider mb-3">
+      System Architecture
+    </div>
+    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">The Multi-Agent Orchestrator</h2>
+    <p class="text-xs text-gray-500 mb-6 font-light leading-relaxed">
+      Unlike standard chatbot prompts, TechStack AI divides architectural design into six sequential stages. The output of one agent serves as the structured input for the next, preserving context and preventing hallucinations.
+    </p>
+
+    <div class="border border-gray-200 rounded-2xl p-6 bg-white space-y-4">
+      <div class="flex flex-col sm:flex-row gap-4 items-center justify-between text-xs font-mono">
+        <div class="p-3 bg-gray-50 border border-gray-150 rounded-xl w-full text-center">
+          <span class="font-bold text-indigo-600 block">Stage 1: Analyst</span>
+          <span class="text-[10px] text-gray-400">Extract Requirements</span>
+        </div>
+        <div class="text-gray-400 font-bold hidden sm:block">➜</div>
+        <div class="p-3 bg-gray-50 border border-gray-150 rounded-xl w-full text-center">
+          <span class="font-bold text-indigo-600 block">Stage 2: Researcher</span>
+          <span class="text-[10px] text-gray-400">Exa Web Sourcing</span>
+        </div>
+        <div class="text-gray-400 font-bold hidden sm:block">➜</div>
+        <div class="p-3 bg-gray-50 border border-gray-150 rounded-xl w-full text-center">
+          <span class="font-bold text-indigo-600 block">Stage 3: Architect</span>
+          <span class="text-[10px] text-gray-400">3 Blueprint Options</span>
+        </div>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row gap-4 items-center justify-between text-xs font-mono">
+        <div class="p-3 bg-gray-50 border border-gray-150 rounded-xl w-full text-center">
+          <span class="font-bold text-indigo-600 block">Stage 6: Orchestrator</span>
+          <span class="text-[10px] text-gray-400">Export Boilerplate</span>
+        </div>
+        <div class="text-gray-400 font-bold hidden sm:block">Selection</span></div>
+        <div class="p-3 bg-gray-50 border border-gray-150 rounded-xl w-full text-center">
+          <span class="font-bold text-indigo-600 block">Stage 5: Auditor</span>
+          <span class="text-[10px] text-gray-400">Security Risk Audit</span>
+        </div>
+        <div class="text-gray-400 font-bold hidden sm:block">Selection</span></div>
+        <div class="p-3 bg-gray-50 border border-gray-150 rounded-xl w-full text-center">
+          <span class="font-bold text-indigo-600 block">Stage 4: FinOps</span>
+          <span class="text-[10px] text-gray-400">1k - 100k Cost projections</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: The Moat -->
+  <section class="mb-12 page-break">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-600 text-[10px] font-bold uppercase tracking-wider mb-3">
+      Product Moat
+    </div>
+    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Why is this a Defensible Moat?</h2>
+    
+    <div class="space-y-6">
+      <div class="flex items-start gap-4">
+        <div class="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm flex-shrink-0">1</div>
+        <div>
+          <h3 class="font-bold text-gray-800 text-sm">Neural Web Search via Exa AI</h3>
+          <p class="text-xs text-gray-500 font-light mt-1 leading-relaxed">
+            Standard LLMs don't know that PostgreSQL had a write-amplification update last year, or that your competitor migrated to DynamoDB in 2025. TechStack AI queries the Exa API semantically, retrieving live engineering articles and injecting verified citations.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm flex-shrink-0">2</div>
+        <div>
+          <h3 class="font-bold text-gray-800 text-sm">Translating Blueprint to Live Calculations</h3>
+          <p class="text-xs text-gray-500 font-light mt-1 leading-relaxed">
+            The Cost Agent doesn't just guess numbers—it exports mathematical factors representing the server, database, and model costs. The frontend uses these parameters to enable a live cost scaling slider, letting users simulate budgets dynamically.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm flex-shrink-0">3</div>
+        <div>
+          <h3 class="font-bold text-gray-800 text-sm">Database Schema Synthesis & PostGIS/Vector Indexes</h3>
+          <p class="text-xs text-gray-500 font-light mt-1 leading-relaxed">
+            TechStack AI goes beyond text by generating customized SQL tables, foreign key constraints, and specific database indices. If you build a mapping app, it designs PostGIS GIST indexes; if you build AI, it designs pgvector cosine-ops HNSW tables.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4">
+        <div class="w-8 h-8 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-sm flex-shrink-0">4</div>
+        <div>
+          <h3 class="font-bold text-gray-800 text-sm">Zero-Config Mock Resiliency</h3>
+          <p class="text-xs text-gray-500 font-light mt-1 leading-relaxed">
+            The system incorporates graceful mock database fallbacks and local cached templates. If API keys are missing, the system detects this on startup and continues to operate seamlessly, making it extremely durable for quick judge deployments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-gray-200 pt-6 mt-12 text-center text-xs text-gray-400">
+    TechStack AI &copy; 2026. Pitch presentation document created for DevLynx Hackathon judges and organizers.
+  </footer>
+
+</body>
+</html>
