@@ -41,11 +41,20 @@ export interface ArchitectureOption {
   monitoring: string;
   pros: string[];
   cons: string[];
-  scalabilityMetric: number;
-  timeToMarketMetric: number;
-  operationalSimplicityMetric: number;
-  budgetFriendlinessMetric: number;
-  hiringEaseMetric: number;
+  scalabilityMetric: number; // 1-10
+  timeToMarketMetric: number; // 1-10
+  operationalSimplicityMetric: number; // 1-10
+  budgetFriendlinessMetric: number; // 1-10
+  hiringEaseMetric: number; // 1-10
+  scores?: ArchitectureScores;
+}
+
+export interface ArchitectureScores {
+  scalability: number;
+  cost: number;
+  reliability: number;
+  speed: number;
+  finalScore: number;
 }
 
 export interface CostTiers {
@@ -99,5 +108,20 @@ export interface Report {
   cost?: CostEstimate;
   risks?: Risk[];
   recommendation?: Recommendation;
+  benchmarkSimilarities?: BenchmarkSimilarity[];
+  decisionTrace?: DecisionTrace;
   createdAt: string;
+}
+
+export interface BenchmarkSimilarity {
+  name: string;
+  percentage: number;
+}
+
+export interface DecisionTrace {
+  requirementsExtractedCount: number;
+  researchSourcesCount: number;
+  architecturesGeneratedCount: number;
+  benchmarksComparedCount: number;
+  finalRecommendationGenerated: boolean;
 }

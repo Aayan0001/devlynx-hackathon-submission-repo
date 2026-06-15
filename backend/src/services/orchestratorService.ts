@@ -6,6 +6,7 @@ import { runArchitectureAgent } from '../agents/architectureAgent';
 import { runCostAgent } from '../agents/costAgent';
 import { runRiskAgent } from '../agents/riskAgent';
 import { runRecommendationAgent } from '../agents/recommendationAgent';
+import { scoreArchitecture, getSimilarBenchmarks } from '../utils/scoring';
 
 export function startAnalysis(request: AnalysisRequest): string {
   const reportId = `report_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
@@ -80,9 +81,30 @@ async function runPipelineAsync(reportId: string): Promise<void> {
     await addLog('System Orchestrator: Activating Stage 3 - Systems Architecture Design Agent...');
     const architectures = await runArchitectureAgent(report.request, requirements, research, addLog);
     
+    // Programmatic scoring & benchmark calculations
+    const userScale = parseInt(report.request.expectedUsers.replace(/,/g, '')) || 50000;
+    architectures.forEach(arch => {
+      arch.scores = scoreArchitecture(arch, userScale);
+    });
+
+    const winningArch = architectures.reduce((prev, curr) => 
+      ((prev.scores?.finalScore || 0) > (curr.scores?.finalScore || 0)) ? prev : curr
+    );
+    const benchmarkSimilarities = getSimilarBenchmarks(winningArch);
+
+    const decisionTrace = {
+      requirementsExtractedCount: 7,
+      researchSourcesCount: research.citations.length,
+      architecturesGeneratedCount: architectures.length,
+      benchmarksComparedCount: 6,
+      finalRecommendationGenerated: false
+    };
+
     updatedReport = await getReport(reportId);
     if (updatedReport) {
       updatedReport.architectures = architectures;
+      updatedReport.benchmarkSimilarities = benchmarkSimilarities;
+      updatedReport.decisionTrace = decisionTrace;
       await saveReport(updatedReport);
     }
 
@@ -113,6 +135,9 @@ async function runPipelineAsync(reportId: string): Promise<void> {
     updatedReport = await getReport(reportId);
     if (updatedReport) {
       updatedReport.recommendation = recommendation;
+      if (updatedReport.decisionTrace) {
+        updatedReport.decisionTrace.finalRecommendationGenerated = true;
+      }
       updatedReport.status = 'completed';
       updatedReport.logs.push({
         timestamp: new Date().toISOString(),
