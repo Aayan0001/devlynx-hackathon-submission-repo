@@ -7,11 +7,19 @@ import { Report, LogEntry } from '../types';
 import ActivityFeed from './ActivityFeed';
 import ResultsView from './ResultsView';
 
+interface Preset {
+  description: string;
+  expectedUsers: string;
+  budget: string;
+  timeline: string;
+}
+
 interface DashboardProps {
+  preset: Preset | null;
   onBack: () => void;
 }
 
-export default function Dashboard({ onBack }: DashboardProps) {
+export default function Dashboard({ preset, onBack }: DashboardProps) {
   // Input fields
   const [description, setDescription] = useState<string>('');
   const [expectedUsers, setExpectedUsers] = useState<string>('50,000');
@@ -30,6 +38,17 @@ export default function Dashboard({ onBack }: DashboardProps) {
   useEffect(() => {
     fetchHistory();
   }, []);
+
+  // Handle auto-triggered preset from landing page
+  useEffect(() => {
+    if (preset) {
+      setDescription(preset.description);
+      setExpectedUsers(preset.expectedUsers);
+      setBudget(preset.budget);
+      setTimeline(preset.timeline);
+      triggerAnalysisWithData(preset.description, preset.expectedUsers, preset.budget, preset.timeline);
+    }
+  }, [preset]);
 
   // Poll report details if running
   useEffect(() => {
@@ -77,10 +96,7 @@ export default function Dashboard({ onBack }: DashboardProps) {
     }
   };
 
-  const handleStartAnalysis = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!description.trim() || description.trim().length < 5) return;
-
+  const triggerAnalysisWithData = async (desc: string, users: string, bud: string, time: string) => {
     setIsSubmitting(true);
     setActiveReport(null);
     setActiveReportId(null);
@@ -90,10 +106,10 @@ export default function Dashboard({ onBack }: DashboardProps) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          description: description.trim(),
-          expectedUsers,
-          budget,
-          timeline
+          description: desc.trim(),
+          expectedUsers: users,
+          budget: bud,
+          timeline: time
         })
       });
 
@@ -108,7 +124,7 @@ export default function Dashboard({ onBack }: DashboardProps) {
       // Initialize basic report state locally while we wait for poll updates
       setActiveReport({
         id: data.id,
-        request: { description, expectedUsers, budget, timeline },
+        request: { description: desc, expectedUsers: users, budget: bud, timeline: time },
         status: 'running',
         logs: [{ timestamp: new Date().toISOString(), message: 'Transmitting request packet to backend orchestrator...' }],
         createdAt: new Date().toISOString()
@@ -118,6 +134,12 @@ export default function Dashboard({ onBack }: DashboardProps) {
       alert(error.message || 'Error occurred during request submission.');
       setIsSubmitting(false);
     }
+  };
+
+  const handleStartAnalysis = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!description.trim() || description.trim().length < 5) return;
+    await triggerAnalysisWithData(description, expectedUsers, budget, timeline);
   };
 
   const handleLoadHistoryItem = async (id: string) => {

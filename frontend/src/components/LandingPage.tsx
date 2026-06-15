@@ -1,8 +1,15 @@
 import React from 'react';
 import { Cpu, Search, DollarSign, ShieldAlert, FileText, ArrowRight, Zap, Code, Award } from 'lucide-react';
 
+interface Preset {
+  description: string;
+  expectedUsers: string;
+  budget: string;
+  timeline: string;
+}
+
 interface LandingPageProps {
-  onStart: () => void;
+  onStart: (preset?: Preset) => void;
 }
 
 export default function LandingPage({ onStart }: LandingPageProps) {
@@ -20,7 +27,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
           </span>
         </div>
         <button 
-          onClick={onStart}
+          onClick={() => onStart()}
           className="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition duration-200 font-medium text-sm text-gray-200 flex items-center gap-2"
         >
           Developer Console <ArrowRight className="w-4 h-4" />
@@ -49,7 +56,7 @@ export default function LandingPage({ onStart }: LandingPageProps) {
         {/* CTA Button */}
         <div className="flex flex-col sm:flex-row gap-4 mb-20">
           <button 
-            onClick={onStart}
+            onClick={() => onStart()}
             className="px-8 py-4 bg-gradient-to-r from-accent to-indigo-600 hover:from-indigo-600 hover:to-accent text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.03] shadow-glow-accent flex items-center justify-center gap-3"
           >
             Launch Decision Copilot <ArrowRight className="w-5 h-5" />
@@ -95,22 +102,54 @@ export default function LandingPage({ onStart }: LandingPageProps) {
             <Award className="w-6 h-6 text-accent" /> Try Common Architectures
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="p-5 rounded-2xl glass-card text-center cursor-pointer border border-white/5 hover:border-accent/30 transition duration-200" onClick={onStart}>
+            <div 
+              className="p-5 rounded-2xl glass-card text-center cursor-pointer border border-white/5 hover:border-accent/30 transition duration-200" 
+              onClick={() => onStart({
+                description: 'Ride-sharing marketplace clone with real-time GPS coordinate passenger matching, routing maps, and notification triggers.',
+                expectedUsers: '100,000',
+                budget: '$1,000 / month',
+                timeline: '4 months'
+              })}
+            >
               <Code className="w-6 h-6 text-accent mx-auto mb-2" />
               <div className="font-bold text-white text-sm">Ride-Sharing App</div>
               <div className="text-xs text-gray-500 mt-1">Real-time GPS</div>
             </div>
-            <div className="p-5 rounded-2xl glass-card text-center cursor-pointer border border-white/5 hover:border-accent/30 transition duration-200" onClick={onStart}>
+            <div 
+              className="p-5 rounded-2xl glass-card text-center cursor-pointer border border-white/5 hover:border-accent/30 transition duration-200"
+              onClick={() => onStart({
+                description: 'AI-powered SaaS offering automated SEO audit generation, web scraping, vector database RAG search summaries, and LLM text generation.',
+                expectedUsers: '10,000',
+                budget: '$300 / month',
+                timeline: '2 months'
+              })}
+            >
               <Cpu className="w-6 h-6 text-indigo-400 mx-auto mb-2" />
               <div className="font-bold text-white text-sm">AI SaaS Agent</div>
               <div className="text-xs text-gray-500 mt-1">Vector DB + LLM</div>
             </div>
-            <div className="p-5 rounded-2xl glass-card text-center cursor-pointer border border-white/5 hover:border-accent/30 transition duration-200" onClick={onStart}>
+            <div 
+              className="p-5 rounded-2xl glass-card text-center cursor-pointer border border-white/5 hover:border-accent/30 transition duration-200"
+              onClick={() => onStart({
+                description: 'High frequency real-time multiplayer card matching lobby web game with persistent rooms and latency-synchronized state engines.',
+                expectedUsers: '50,000',
+                budget: '$200 / month',
+                timeline: '3 months'
+              })}
+            >
               <Zap className="w-6 h-6 text-emerald-400 mx-auto mb-2" />
               <div className="font-bold text-white text-sm">Multiplayer Game</div>
               <div className="text-xs text-gray-500 mt-1">Socket Sync</div>
             </div>
-            <div className="p-5 rounded-2xl glass-card text-center cursor-pointer border border-white/5 hover:border-accent/30 transition duration-200" onClick={onStart}>
+            <div 
+              className="p-5 rounded-2xl glass-card text-center cursor-pointer border border-white/5 hover:border-accent/30 transition duration-200"
+              onClick={() => onStart({
+                description: 'B2B e-commerce marketplace platform supporting user storefronts, product catalogs, transactional orders ledger, and Stripe payouts.',
+                expectedUsers: '50,000',
+                budget: '$500 / month',
+                timeline: '3 months'
+              })}
+            >
               <DollarSign className="w-6 h-6 text-amber-400 mx-auto mb-2" />
               <div className="font-bold text-white text-sm">Marketplace Platform</div>
               <div className="text-xs text-gray-500 mt-1">ACID Relational</div>

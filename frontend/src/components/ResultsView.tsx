@@ -5,6 +5,157 @@ import {
 } from 'lucide-react';
 import { Report, ArchitectureOption, Risk, Citation } from '../types';
 
+interface SchemaField {
+  name: string;
+  type: string;
+  constraints: string;
+}
+
+interface SchemaTable {
+  tableName: string;
+  fields: SchemaField[];
+  indexes: string[];
+}
+
+function getDatabaseSchema(description: string): SchemaTable[] {
+  const desc = description.toLowerCase();
+  
+  if (desc.includes('uber') || desc.includes('ride') || desc.includes('map') || desc.includes('gps')) {
+    return [
+      {
+        tableName: 'drivers',
+        fields: [
+          { name: 'id', type: 'UUID', constraints: 'PRIMARY KEY' },
+          { name: 'name', type: 'VARCHAR(100)', constraints: 'NOT NULL' },
+          { name: 'rating', type: 'NUMERIC(3,2)', constraints: 'DEFAULT 5.00' },
+          { name: 'status', type: 'VARCHAR(20)', constraints: 'NOT NULL DEFAULT \'offline\'' },
+          { name: 'created_at', type: 'TIMESTAMP', constraints: 'DEFAULT CURRENT_TIMESTAMP' }
+        ],
+        indexes: [
+          'CREATE INDEX idx_drivers_status ON drivers(status);'
+        ]
+      },
+      {
+        tableName: 'driver_locations',
+        fields: [
+          { name: 'id', type: 'BIGSERIAL', constraints: 'PRIMARY KEY' },
+          { name: 'driver_id', type: 'UUID', constraints: 'REFERENCES drivers(id) ON DELETE CASCADE' },
+          { name: 'coords', type: 'GEOMETRY(Point, 4326)', constraints: 'NOT NULL' },
+          { name: 'speed_kmh', type: 'NUMERIC(5,2)', constraints: 'DEFAULT 0.00' },
+          { name: 'heading_deg', type: 'INTEGER', constraints: 'CHECK (heading_deg >= 0 AND heading_deg <= 360)' },
+          { name: 'updated_at', type: 'TIMESTAMP', constraints: 'DEFAULT CURRENT_TIMESTAMP' }
+        ],
+        indexes: [
+          'CREATE INDEX idx_driver_locations_spatial ON driver_locations USING gist(coords);',
+          'CREATE INDEX idx_driver_locations_driver_id ON driver_locations(driver_id);'
+        ]
+      },
+      {
+        tableName: 'trips',
+        fields: [
+          { name: 'id', type: 'UUID', constraints: 'PRIMARY KEY' },
+          { name: 'passenger_id', type: 'UUID', constraints: 'NOT NULL' },
+          { name: 'driver_id', type: 'UUID', constraints: 'REFERENCES drivers(id)' },
+          { name: 'status', type: 'VARCHAR(30)', constraints: 'NOT NULL DEFAULT \'requested\'' },
+          { name: 'pickup_coords', type: 'GEOMETRY(Point, 4326)', constraints: 'NOT NULL' },
+          { name: 'dropoff_coords', type: 'GEOMETRY(Point, 4326)', constraints: 'NOT NULL' },
+          { name: 'fare_amount', type: 'NUMERIC(10,2)', constraints: 'DEFAULT 0.00' },
+          { name: 'created_at', type: 'TIMESTAMP', constraints: 'DEFAULT CURRENT_TIMESTAMP' }
+        ],
+        indexes: [
+          'CREATE INDEX idx_trips_driver_passenger ON trips(driver_id, passenger_id);',
+          'CREATE INDEX idx_trips_status ON trips(status);'
+        ]
+      }
+    ];
+  } else if (desc.includes('ai') || desc.includes('saas') || desc.includes('openai') || desc.includes('llm') || desc.includes('seo') || desc.includes('automation') || desc.includes('rag')) {
+    return [
+      {
+        tableName: 'users',
+        fields: [
+          { name: 'id', type: 'UUID', constraints: 'PRIMARY KEY' },
+          { name: 'email', type: 'VARCHAR(255)', constraints: 'UNIQUE NOT NULL' },
+          { name: 'password_hash', type: 'VARCHAR(255)', constraints: 'NOT NULL' },
+          { name: 'plan_tier', type: 'VARCHAR(50)', constraints: 'DEFAULT \'free\'' },
+          { name: 'created_at', type: 'TIMESTAMP', constraints: 'DEFAULT CURRENT_TIMESTAMP' }
+        ],
+        indexes: [
+          'CREATE INDEX idx_users_email ON users(email);'
+        ]
+      },
+      {
+        tableName: 'documents',
+        fields: [
+          { name: 'id', type: 'UUID', constraints: 'PRIMARY KEY' },
+          { name: 'user_id', type: 'UUID', constraints: 'REFERENCES users(id) ON DELETE CASCADE' },
+          { name: 'title', type: 'VARCHAR(255)', constraints: 'NOT NULL' },
+          { name: 'raw_content', type: 'TEXT', constraints: 'NOT NULL' },
+          { name: 'created_at', type: 'TIMESTAMP', constraints: 'DEFAULT CURRENT_TIMESTAMP' }
+        ],
+        indexes: [
+          'CREATE INDEX idx_documents_user_id ON documents(user_id);'
+        ]
+      },
+      {
+        tableName: 'document_chunks',
+        fields: [
+          { name: 'id', type: 'UUID', constraints: 'PRIMARY KEY' },
+          { name: 'document_id', type: 'UUID', constraints: 'REFERENCES documents(id) ON DELETE CASCADE' },
+          { name: 'chunk_text', type: 'TEXT', constraints: 'NOT NULL' },
+          { name: 'embedding', type: 'VECTOR(1536)', constraints: 'NOT NULL' }
+        ],
+        indexes: [
+          'CREATE INDEX idx_document_chunks_vector ON document_chunks USING hnsw (embedding vector_cosine_ops);',
+          'CREATE INDEX idx_document_chunks_doc_id ON document_chunks(document_id);'
+        ]
+      }
+    ];
+  } else {
+    return [
+      {
+        tableName: 'users',
+        fields: [
+          { name: 'id', type: 'UUID', constraints: 'PRIMARY KEY' },
+          { name: 'email', type: 'VARCHAR(255)', constraints: 'UNIQUE NOT NULL' },
+          { name: 'password_hash', type: 'VARCHAR(255)', constraints: 'NOT NULL' },
+          { name: 'role', type: 'VARCHAR(50)', constraints: 'NOT NULL DEFAULT \'buyer\'' },
+          { name: 'created_at', type: 'TIMESTAMP', constraints: 'DEFAULT CURRENT_TIMESTAMP' }
+        ],
+        indexes: [
+          'CREATE INDEX idx_users_email ON users(email);'
+        ]
+      },
+      {
+        tableName: 'storefronts',
+        fields: [
+          { name: 'id', type: 'UUID', constraints: 'PRIMARY KEY' },
+          { name: 'owner_id', type: 'UUID', constraints: 'REFERENCES users(id) ON DELETE CASCADE' },
+          { name: 'name', type: 'VARCHAR(150)', constraints: 'NOT NULL' },
+          { name: 'description', type: 'TEXT', constraints: '' }
+        ],
+        indexes: [
+          'CREATE INDEX idx_storefronts_owner ON storefronts(owner_id);'
+        ]
+      },
+      {
+        tableName: 'products',
+        fields: [
+          { name: 'id', type: 'UUID', constraints: 'PRIMARY KEY' },
+          { name: 'storefront_id', type: 'UUID', constraints: 'REFERENCES storefronts(id) ON DELETE CASCADE' },
+          { name: 'name', type: 'VARCHAR(200)', constraints: 'NOT NULL' },
+          { name: 'description', type: 'TEXT', constraints: '' },
+          { name: 'price_cents', type: 'INTEGER', constraints: 'NOT NULL CHECK (price_cents >= 0)' },
+          { name: 'stock_quantity', type: 'INTEGER', constraints: 'NOT NULL DEFAULT 0' }
+        ],
+        indexes: [
+          'CREATE INDEX idx_products_storefront_id ON products(storefront_id);',
+          'CREATE INDEX idx_products_search_idx ON products USING gin(to_tsvector(\'english\', name || \' \' || description));'
+        ]
+      }
+    ];
+  }
+}
+
 interface ResultsViewProps {
   report: Report;
 }
@@ -178,6 +329,57 @@ export default function ResultsView({ report }: ResultsViewProps) {
             </div>
           ))}
         </div>
+
+        {/* Side-by-Side Architectural Evaluation Matrix */}
+        <div className="mt-8 p-6 bg-card border border-white/5 rounded-3xl">
+          <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-1.5">
+            <Activity className="w-4 h-4 text-accent" /> Side-by-Side Architectural Evaluation Matrix
+          </h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs text-left text-gray-400">
+              <thead>
+                <tr className="border-b border-white/5 text-[10px] uppercase tracking-wider text-gray-500">
+                  <th className="py-3 pr-4">Evaluation Metric</th>
+                  {architectures.map((a) => (
+                    <th key={a.id} className="py-3 px-4 text-white font-semibold">{a.name.split(':')[0]}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                <tr className="hover:bg-white/[0.02]">
+                  <td className="py-3.5 pr-4 font-medium text-gray-300">Scalability & Peak Capacity</td>
+                  {architectures.map((a) => (
+                    <td key={a.id} className="py-3.5 px-4 font-mono font-bold text-accent">{a.scalabilityMetric}/10</td>
+                  ))}
+                </tr>
+                <tr className="hover:bg-white/[0.02]">
+                  <td className="py-3.5 pr-4 font-medium text-gray-300">Budget Friendliness</td>
+                  {architectures.map((a) => (
+                    <td key={a.id} className="py-3.5 px-4 font-mono font-bold text-emerald-400">{a.budgetFriendlinessMetric}/10</td>
+                  ))}
+                </tr>
+                <tr className="hover:bg-white/[0.02]">
+                  <td className="py-3.5 pr-4 font-medium text-gray-300">Time-to-Market Speed</td>
+                  {architectures.map((a) => (
+                    <td key={a.id} className="py-3.5 px-4 font-mono font-bold text-amber-400">{a.timeToMarketMetric}/10</td>
+                  ))}
+                </tr>
+                <tr className="hover:bg-white/[0.02]">
+                  <td className="py-3.5 pr-4 font-medium text-gray-300">Operational Simplicity</td>
+                  {architectures.map((a) => (
+                    <td key={a.id} className="py-3.5 px-4 font-mono font-bold text-cyan-400">{a.operationalSimplicityMetric}/10</td>
+                  ))}
+                </tr>
+                <tr className="hover:bg-white/[0.02]">
+                  <td className="py-3.5 pr-4 font-medium text-gray-300">Talent Pool / Ease of Hiring</td>
+                  {architectures.map((a) => (
+                    <td key={a.id} className="py-3.5 px-4 font-mono font-bold text-indigo-300">{a.hiringEaseMetric}/10</td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       {/* 3. Interactive Architectural Node Diagram (CSS/SVG) */}
@@ -263,6 +465,61 @@ export default function ResultsView({ report }: ResultsViewProps) {
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none -z-10 grid-glow"></div>
         </div>
       </div>
+
+    {/* Recommended Database Schema Blueprint */}
+    <div className="p-6 sm:p-8 bg-[#121420]/60 border border-white/5 rounded-3xl">
+      <h2 className="text-xl sm:text-2xl font-bold text-white mb-2 flex items-center gap-2">
+        <Database className="w-5 h-5 text-accent animate-pulse" /> Recommended Database Schema Blueprint
+      </h2>
+      <p className="text-xs text-gray-500 mb-6 font-light">Targeted database tables structures, relational constraints, and performance query indexes.</p>
+      
+      <div className="space-y-6">
+        {getDatabaseSchema(report.request.description).map((table, tIdx) => (
+          <div key={tIdx} className="border border-white/5 rounded-2xl overflow-hidden bg-black/30">
+            {/* Table Header */}
+            <div className="px-4 py-3 bg-white/5 border-b border-white/5 flex items-center justify-between">
+              <span className="text-xs font-bold text-white font-mono flex items-center gap-2">
+                <Database className="w-4 h-4 text-emerald-400" /> Table: {table.tableName}
+              </span>
+            </div>
+            
+            {/* Columns Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs text-left text-gray-400 font-mono">
+                <thead>
+                  <tr className="border-b border-white/5 text-[10px] text-gray-500 uppercase tracking-wider">
+                    <th className="py-2.5 px-4">Field Name</th>
+                    <th className="py-2.5 px-4">Data Type</th>
+                    <th className="py-2.5 px-4">Attributes / Constraints</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {table.fields.map((f, fIdx) => (
+                    <tr key={fIdx} className="hover:bg-white/[0.01]">
+                      <td className="py-2.5 px-4 text-emerald-400 font-bold">{f.name}</td>
+                      <td className="py-2.5 px-4 text-indigo-300">{f.type}</td>
+                      <td className="py-2.5 px-4 text-gray-500 font-light">{f.constraints || '-'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            
+            {/* Indexes */}
+            {table.indexes.length > 0 && (
+              <div className="p-4 bg-black/40 border-t border-white/5 font-mono text-[10px] text-gray-400">
+                <span className="text-[9px] font-bold text-accent uppercase tracking-wider block mb-2">Performance Optimization Indexes</span>
+                <div className="space-y-1">
+                  {table.indexes.map((idxStr, idxKey) => (
+                    <div key={idxKey} className="text-gray-300 bg-white/5 p-2 rounded border border-white/5 select-all">{idxStr}</div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
 
       {/* 4. Dynamic Scaling & Cost Simulator Slider */}
       {cost && (
